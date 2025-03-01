@@ -15,15 +15,20 @@ typedef struct
 
 QueenTracker *new_tracker(int board_area)
 {
-  QueenTracker qt;
+  QueenTracker *qt = (QueenTracker *)malloc(sizeof(QueenTracker));
+
+  if (qt == NULL)
+  {
+    return NULL;
+  }
 
   // I dont think there will come a case
   // where we will need more than
   // a quarter of the board's area
-  qt.queen_x = (int *)malloc(board_area / 4);
-  qt.queen_y = (int *)malloc(board_area / 4);
-  qt.capacity = board_area / 4;
-  qt.len = 0;
+  qt->queen_x = (int *)malloc(board_area / 4);
+  qt->queen_y = (int *)malloc(board_area / 4);
+  qt->capacity = board_area / 4;
+  qt->len = 0;
 
   return &qt;
 }
@@ -34,6 +39,7 @@ void free_tracker(QueenTracker *qt)
   // a lof of these but still good practice, no?
   free(qt->queen_x);
   free(qt->queen_y);
+  free(qt);
 }
 
 void feed_line(QueenTracker *qt, char *line, int lineno) // idk how to describe this. lineno also serves as the y-coordinate
@@ -69,8 +75,8 @@ void qt_grow(QueenTracker *qt)
 {
   int new_cap = qt->capacity * 2;
 
-  realloc(qt->queen_x, new_cap);
-  realloc(qt->queen_y, new_cap);
+  qt->queen_x = realloc(qt->queen_x, new_cap);
+  qt->queen_y = realloc(qt->queen_y, new_cap);
 
   qt->capacity = new_cap;
 }

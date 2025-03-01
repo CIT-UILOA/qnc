@@ -9,6 +9,13 @@
 int main()
 {
   QueenTracker *qt = new_tracker(BOARD_SIZE);
+
+  if (qt == NULL)
+  {
+    perror("Unable to initialize queen tracker");
+    return 1;
+  }
+
   FILE *input = fopen("input", "r");
   if (input == NULL)
   {
