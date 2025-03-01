@@ -8,6 +8,7 @@ int main()
   if (input == NULL)
   {
     perror("Unable to open input file");
+    // input = stdin;
     return 1;
   }
 
