@@ -43,6 +43,10 @@ int main()
     lineno++;
   };
 
+  printf("Safety status: ");
+  check_for_war(qt);
+  printf("\n");
+
   fclose(input);
   free_tracker(qt);
 }

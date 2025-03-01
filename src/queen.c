@@ -33,6 +33,54 @@ QueenTracker *new_tracker(int board_area)
   return qt;
 }
 
+void check_for_war(QueenTracker *qt)
+{
+  int a_x = 0, a_y = 0, b_x = 0, b_y = 0;
+
+  size_t board_len = qt->len;
+
+  if (board_len <= 1)
+  {
+    // Either the board is empty, or
+    // there is only 1 queen on the board
+    printf("SAFE");
+    return;
+  }
+
+  for (int coord_a = 0; coord_a < board_len; coord_a++)
+  {
+    a_x = qt->queen_x[coord_a];
+    a_y = qt->queen_y[coord_a];
+
+    for (int coord_b = 0; coord_b < board_len; coord_b++)
+    {
+      // skip checking if the compared (coord b)
+      // is the same as coord a
+      if (coord_a == coord_b)
+      {
+        continue;
+      }
+
+      b_x = qt->queen_x[coord_b];
+      b_y = qt->queen_y[coord_b];
+
+      // if ax and bx OR
+      // ay and by are the same
+      if (a_x == b_x || a_y == b_y)
+      {
+        printf("WAR (Horizontal or Vertical)");
+        return;
+      } // ... or...BASTA OI KANI!!!
+      else if (abs(a_x - b_x) == abs(a_y - b_y))
+      {
+        printf("WAR (Diagonal)");
+        return;
+      }
+    }
+  }
+  printf("SAFE");
+}
+
 void free_tracker(QueenTracker *qt)
 {
   // Gotta free these. Again, won't be instantiating
@@ -82,7 +130,6 @@ void feed_line(QueenTracker *qt, char *line, int lineno) // idk how to describe 
 }
 
 // Debugging stuff
-#ifdef __YOU_ARE_QUEEN
 void debug_tracker(QueenTracker *qt)
 {
   int len = qt->len, current_x = 0, current_y = 0;
@@ -96,4 +143,3 @@ void debug_tracker(QueenTracker *qt)
     printf("\t[%d] (%d, %d)\n", i, current_x, current_y);
   }
 }
-#endif
