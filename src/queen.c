@@ -82,6 +82,7 @@ void feed_line(QueenTracker *qt, char *line, int lineno) // idk how to describe 
 }
 
 // Debugging stuff
+#ifdef __YOU_ARE_QUEEN
 void debug_tracker(QueenTracker *qt)
 {
   int len = qt->len, current_x = 0, current_y = 0;
@@ -95,3 +96,4 @@ void debug_tracker(QueenTracker *qt)
     printf("\t[%d] (%d, %d)\n", i, current_x, current_y);
   }
 }
+#endif
