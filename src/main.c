@@ -1,4 +1,5 @@
-#define BOARD_SIZE 10
+#define BOARD_SIZE 8
+#define BUFFER_SIZE BOARD_SIZE + 2
 #define __YOU_ARE_QUEEN
 
 #include <stdio.h>
@@ -7,6 +8,7 @@
 
 int main()
 {
+  QueenTracker *qt = new_tracker(BOARD_SIZE);
   FILE *input = fopen("input", "r");
   if (input == NULL)
   {
@@ -15,11 +17,11 @@ int main()
     return 1;
   }
 
-  char buf[BOARD_SIZE];
-  memset(&buf, 0, BOARD_SIZE);
+  char buf[BUFFER_SIZE];
+  memset(&buf, 0, BUFFER_SIZE);
 
   int lineno = 0;
-  while (fgets(buf, BOARD_SIZE, input) != NULL)
+  while (fgets(buf, BUFFER_SIZE, input) != NULL)
   {
     size_t len = strlen(buf);
     if (len > 0 && buf[len - 1] == '\n')
@@ -30,4 +32,5 @@ int main()
   };
 
   fclose(input);
+  free_tracker(qt);
 }
