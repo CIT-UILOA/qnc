@@ -36,6 +36,9 @@ int main()
       buf[len - 1] = '\0';
     }
     printf("%d %s\n", lineno++, buf);
+
+    feed_line(qt, buf, lineno);
+    debug_tracker(qt);
   };
 
   fclose(input);

@@ -30,7 +30,7 @@ QueenTracker *new_tracker(int board_area)
   qt->capacity = board_area / 4;
   qt->len = 0;
 
-  return &qt;
+  return qt;
 }
 
 void free_tracker(QueenTracker *qt)
@@ -42,19 +42,14 @@ void free_tracker(QueenTracker *qt)
   free(qt);
 }
 
-void feed_line(QueenTracker *qt, char *line, int lineno) // idk how to describe this. lineno also serves as the y-coordinate
+void qt_grow(QueenTracker *qt)
 {
-  size_t line_len = strlen(line);
+  int new_cap = qt->capacity * 2;
 
-  // colno is our x-coordinate, just wanted to keep
-  // consistency since i named the other lineno
-  for (int colno = 0; colno < line_len; colno++)
-  {
-    if (line[colno] == 'Q')
-    {
-      push_coordinates(qt, colno, lineno);
-    }
-  }
+  qt->queen_x = realloc(qt->queen_x, new_cap);
+  qt->queen_y = realloc(qt->queen_y, new_cap);
+
+  qt->capacity = new_cap;
 }
 
 void push_coordinates(QueenTracker *qt, int x, int y)
@@ -71,14 +66,19 @@ void push_coordinates(QueenTracker *qt, int x, int y)
   qt->len++;
 }
 
-void qt_grow(QueenTracker *qt)
+void feed_line(QueenTracker *qt, char *line, int lineno) // idk how to describe this. lineno also serves as the y-coordinate
 {
-  int new_cap = qt->capacity * 2;
+  size_t line_len = strlen(line);
 
-  qt->queen_x = realloc(qt->queen_x, new_cap);
-  qt->queen_y = realloc(qt->queen_y, new_cap);
-
-  qt->capacity = new_cap;
+  // colno is our x-coordinate, just wanted to keep
+  // consistency since i named the other lineno
+  for (int colno = 0; colno < line_len; colno++)
+  {
+    if (line[colno] == 'Q')
+    {
+      push_coordinates(qt, colno, lineno);
+    }
+  }
 }
 
 // Debugging stuff
