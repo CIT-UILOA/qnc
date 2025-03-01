@@ -13,15 +13,19 @@ typedef struct
   int *queen_y;
 } QueenTracker;
 
-void new_tracker(QueenTracker *qt, int board_area)
+QueenTracker *new_tracker(int board_area)
 {
+  QueenTracker qt;
+
   // I dont think there will come a case
   // where we will need more than
   // a quarter of the board's area
-  qt->queen_x = (int *)malloc(board_area / 4);
-  qt->queen_y = (int *)malloc(board_area / 4);
-  qt->capacity = board_area / 4;
-  qt->len = 0;
+  qt.queen_x = (int *)malloc(board_area / 4);
+  qt.queen_y = (int *)malloc(board_area / 4);
+  qt.capacity = board_area / 4;
+  qt.len = 0;
+
+  return &qt;
 }
 
 void free_tracker(QueenTracker *qt)
