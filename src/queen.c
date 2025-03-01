@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 typedef struct
 {
@@ -68,4 +69,19 @@ void qt_grow(QueenTracker *qt)
   realloc(qt->queen_y, new_cap);
 
   qt->capacity = new_cap;
+}
+
+// Debugging stuff
+void debug_tracker(QueenTracker *qt)
+{
+  int len = qt->len, current_x = 0, current_y = 0;
+
+  printf("%d coordinates listed in tracker:\n", len);
+  for (int i = 0; i < len; i++)
+  {
+    current_x = qt->queen_x[i];
+    current_y = qt->queen_y[i];
+
+    printf("\t[%d] (%d, %d)\n", i, current_x, current_y);
+  }
 }
