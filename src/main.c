@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include "queen.h"
 #define BOARD_SIZE 10
 
 int main()
