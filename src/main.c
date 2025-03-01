@@ -1,7 +1,9 @@
+#define BOARD_SIZE 10
+#define __YOU_ARE_QUEEN
+
 #include <stdio.h>
 #include <string.h>
 #include "queen.h"
-#define BOARD_SIZE 10
 
 int main()
 {
