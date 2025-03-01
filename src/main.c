@@ -35,10 +35,12 @@ int main()
     {
       buf[len - 1] = '\0';
     }
-    printf("%d %s\n", lineno++, buf);
-
     feed_line(qt, buf, lineno);
+    printf("%d %s\n", lineno, buf);
+
     debug_tracker(qt);
+
+    lineno++;
   };
 
   fclose(input);
