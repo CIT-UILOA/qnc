@@ -35,3 +35,17 @@ Safety status: WAR (Diagonal)
 The queen on line 4 is in sight of the queen in ilne 6, which the checker sees as "war".
 
 This code was made in response to a goofy CS problem for last year's UPC Programming competition, in order to prepare for this year's competition
+
+## Building
+
+This project requires CMake and some C compiler:
+```sh
+mkdir build
+cd build
+cmake ..
+make
+# Make sure that there's a file
+# named `input` before running
+# the binary
+./queen
+```
