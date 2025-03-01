@@ -42,7 +42,7 @@ void free_tracker(QueenTracker *qt)
   free(qt);
 }
 
-void qt_grow(QueenTracker *qt)
+void grow_tracker_buffers(QueenTracker *qt)
 {
   int new_cap = qt->capacity * 2;
 
@@ -56,7 +56,7 @@ void push_coordinates(QueenTracker *qt, int x, int y)
 {
   if (qt->len == qt->capacity)
   {
-    qt_grow(qt);
+    grow_tracker_buffers(qt);
   }
 
   int current_index = qt->len;
