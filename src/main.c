@@ -1,6 +1,8 @@
 #define BOARD_SIZE 8
 #define BUFFER_SIZE BOARD_SIZE + 2
-#define __YOU_ARE_QUEEN
+// Uncomment this line to allow
+// queen tracker inspection
+// #define __YOU_ARE_QUEEN
 
 #include <stdio.h>
 #include <string.h>
@@ -38,7 +40,9 @@ int main()
     feed_line(qt, buf, lineno);
     printf("%d %s\n", lineno, buf);
 
+#ifdef __YOU_ARE_QUEEN
     debug_tracker(qt);
+#endif
 
     lineno++;
   };
